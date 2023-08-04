@@ -20,6 +20,10 @@ export default {
 .logo {
   height: 1.5em;
   vertical-align: -0.4em;
+
+  @media (prefers-color-scheme: dark) {
+    filter: invert(100%);
+  }
 }
 
 .navbar-brand {

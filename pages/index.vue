@@ -11,7 +11,7 @@ const siteName = useSiteName()
       <h1 class="mb-4">{{ siteName }}</h1>
       <input-bar />
       <p class="mt-2 mb-0">
-        <strong>Tip.</strong> You can only type <code>Name/Repo</code> so that the renderer will point to the given
+        💡 <strong>Tip.</strong> You can only type <code>Name/Repo</code> so that the renderer will point to the given
         repository <code>README.md</code> from the <code>main</code> branch !
       </p>
     </div>
@@ -21,5 +21,9 @@ const siteName = useSiteName()
 <style lang="scss" scoped>
 .logo {
   height: 120px;
+
+  @media (prefers-color-scheme: dark) {
+    filter: invert(100%);
+  }
 }
 </style>

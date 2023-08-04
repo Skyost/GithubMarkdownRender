@@ -68,6 +68,7 @@ const { pending, error, data } = await useFetch(url, {
 
 <style lang="scss">
 @import 'assets/bootstrap-mixins';
+@import 'assets/colors';
 @import 'github-markdown-css/github-markdown.css';
 
 .spinner-border {
@@ -82,6 +83,10 @@ const { pending, error, data } = await useFetch(url, {
   @include media-breakpoint-down(lg) {
     padding-top: 20px;
     padding-bottom: 20px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $dark;
   }
 }
 </style>

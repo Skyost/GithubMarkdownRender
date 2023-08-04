@@ -1,6 +1,7 @@
 <template>
   <div class="page-layout">
     <nuxt-loading-indicator color="#000000" />
+    <toggle-bootstrap-dark-mode />
     <page-navbar />
     <page-content class="page-content">
       <slot />

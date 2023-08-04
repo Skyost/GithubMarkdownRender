@@ -4,9 +4,12 @@
       <ski-form-control
         v-model="target"
         placeholder="Skyost/Beerstory/master/docs/privacy_policy.md"
-        aria-describedby="button-render"
+        aria-describedby="button-render-light"
       />
-      <ski-button id="button-render" type="submit" :to="url">
+      <ski-button id="button-render-light" type="submit" :to="url">
+        <ski-icon icon="arrow-right" />
+      </ski-button>
+      <ski-button id="button-render-dark" variant="light" type="submit" :to="url">
         <ski-icon icon="arrow-right" />
       </ski-button>
     </ski-input-group>
@@ -32,3 +35,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+#button-render-light {
+  @media (prefers-color-scheme: dark) {
+    display: none;
+  }
+}
+
+#button-render-dark {
+  @media (prefers-color-scheme: light) {
+    display: none;
+  }
+}
+</style>
