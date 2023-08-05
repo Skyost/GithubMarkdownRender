@@ -1,7 +1,11 @@
+<script setup lang="ts">
+const theme = useTheme()
+</script>
+
 <template>
   <div class="page-layout">
-    <nuxt-loading-indicator color="#000000" />
-    <toggle-bootstrap-dark-mode />
+    <Html :data-bs-theme="theme" />
+    <nuxt-loading-indicator :color="theme === 'light' ? 'black' : 'white'" />
     <page-navbar />
     <page-content class="page-content">
       <slot />

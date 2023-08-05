@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import InputBar from '~/components/Home/InputBar.vue'
-const siteName = useSiteName()
+import siteMeta from '~/siteMeta'
 </script>
 
 <template>
@@ -8,10 +8,10 @@ const siteName = useSiteName()
     <div class="align-self-center text-center">
       <page-head title="Home" />
       <img class="logo" src="/images/logo.svg" alt="Logo">
-      <h1 class="mb-4">{{ siteName }}</h1>
+      <h1 class="mb-4">{{ siteMeta.name }}</h1>
       <input-bar />
       <p class="mt-2 mb-0">
-        💡 <strong>Tip.</strong> You can only type <code>Name/Repo</code> so that the renderer will point to the given
+        💡 <strong>Tip.</strong> You can type <code>Name/Repo</code> so that the renderer will point to the given
         repository <code>README.md</code> from the <code>main</code> branch !
       </p>
     </div>

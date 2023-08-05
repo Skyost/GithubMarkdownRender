@@ -60,11 +60,13 @@ export default defineNuxtConfig({
     name: siteMeta.name
   },
 
-  linkChecker: {
-    failOnError: false
-  },
-
   cname: {
     hostname: url
+  },
+
+  nitro: {
+    prerender: {
+      routes: siteMeta.prerender
+    }
   }
 })

@@ -1,27 +1,29 @@
 <script setup lang="ts">
 import DOMPurify from 'isomorphic-dompurify'
+import siteMeta from '~/siteMeta'
 
 const route = useRoute()
 const marked = useMarked()
-const githubUrl = useSiteGithubUrl()
 
 let user = null
 let repo = null
 let branch = 'main'
 let path = 'README.md'
-if (route.params.slug.length >= 2) {
-  user = route.params.slug[0]
-  repo = route.params.slug[1]
-  if (route.params.slug.length >= 3 && route.params.slug[2].length > 0) {
-    branch = route.params.slug[2]
-    if (route.params.slug.length >= 4 && route.params.slug[3].length > 0) {
-      path = route.params.slug.slice(3, route.params.slug.length).join('/')
+
+const slug: string[] = route.params.slug as string[]
+if (slug.length >= 2) {
+  user = slug[0]
+  repo = slug[1]
+  if (slug.length >= 3 && slug[2].length > 0) {
+    branch = slug[2]
+    if (slug.length >= 4 && slug[3].length > 0) {
+      path = slug.slice(3, slug.length).join('/')
     }
   }
 }
 const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}`
 const { pending, error, data } = await useFetch(url, {
-  transform: markdown => DOMPurify.sanitize(marked.parse(markdown))
+  transform: (markdown: string) => DOMPurify.sanitize(marked.parse(markdown))
 })
 </script>
 
@@ -56,7 +58,7 @@ const { pending, error, data } = await useFetch(url, {
       </ul>
       <p class="mb-0">
         If you still believe that this error comes from this software, please open an issue on
-        <a :href="`${githubUrl}/issues/new`">Github</a>.
+        <a :href="`${siteMeta.githubUrl}/issues/new`">Github</a>.
       </p>
     </div>
     <div v-else>

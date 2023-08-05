@@ -4,14 +4,6 @@
   </ski-container>
 </template>
 
-<script>
-import { SkiContainer } from 'skimple-components'
-
-export default {
-  components: { SkiContainer }
-}
-</script>
-
 <style lang="scss" scoped>
 .page-content {
   padding-top: 20px;

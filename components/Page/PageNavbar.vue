@@ -1,11 +1,11 @@
 <script setup lang="ts">
-const siteName = useSiteName()
+import siteMeta from '~/siteMeta'
 </script>
 
 <template>
   <ski-navbar brightness="primary" class="navbar bg-body-tertiary">
     <ski-navbar-collapse id="page-navbar-collapse">
-      <page-navbar-brand class="d-none d-lg-inline" :title="siteName" />
+      <page-navbar-brand class="d-none d-lg-inline" :title="siteMeta.name" />
       <ski-navbar-items class="ms-auto">
         <ski-navbar-item class="page-navbar-item" to="/" :active="$route.path === '/'">
           <ski-icon icon="house-door-fill" /> Home
