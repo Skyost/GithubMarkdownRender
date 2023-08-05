@@ -9,11 +9,14 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@octokit/rest": "^20.0.1",
     "github-markdown-css": "^5.2.0",
     "highlight.js": "^11.8.0",
     "isomorphic-dompurify": "^1.8.0",
     "marked": "^6.0.0",
+    "marked-emoji": "^1.2.1",
     "marked-gfm-heading-id": "^3.0.5",
+    "marked-highlight": "^2.0.2",
     "node-html-parser": "^6.1.5",
     "skimple-components": "^0.5.19"
   },

@@ -3,7 +3,7 @@ import DOMPurify from 'isomorphic-dompurify'
 import siteMeta from '~/siteMeta'
 
 const route = useRoute()
-const marked = useMarked()
+const marked = await useMarked()
 
 let user = null
 let repo = null
