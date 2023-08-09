@@ -1,6 +1,7 @@
 import { marked } from 'marked'
 import { gfmHeadingId } from 'marked-gfm-heading-id'
 import { markedEmoji } from 'marked-emoji'
+import { mangle } from 'marked-mangle'
 import { Octokit } from '@octokit/rest'
 import { markedHighlight } from 'marked-highlight'
 import hljs from 'highlight.js'
@@ -12,6 +13,7 @@ export const useMarked = async () => {
     const octokit = new Octokit()
     const response = await octokit.rest.emojis.get()
     marked.use(markedEmoji({ emojis: response.data as Record<string, string> }))
+    marked.use(mangle())
     marked.use(markedHighlight({
       langPrefix: 'hljs language-',
       highlight (code, lang) {
@@ -19,10 +21,6 @@ export const useMarked = async () => {
         return hljs.highlight(code, { language }).value
       }
     }))
-    marked.use({
-      gfm: true,
-      mangle: false
-    })
 
     const defaultRenderer = new marked.Renderer(marked.defaults)
     const renderer = {

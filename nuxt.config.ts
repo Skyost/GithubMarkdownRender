@@ -9,6 +9,10 @@ const url = process.env.DEBUG_MODE === 'true' ? 'http://localhost:3000' : siteMe
 export default defineNuxtConfig({
   ssr: true,
 
+  devtools: {
+    enabled: process.env.DEBUG_MODE === 'true'
+  },
+
   app: {
     head: {
       titleTemplate: `%s | ${siteMeta.name}`,
