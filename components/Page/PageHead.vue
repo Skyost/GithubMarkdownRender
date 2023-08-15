@@ -5,27 +5,17 @@ const runtimeConfig = useRuntimeConfig()
 const route = useRoute()
 const currentAddress = `${runtimeConfig.public.url}${route.path}`
 
-defineProps({
-  title: {
-    type: String,
-    required: true
-  },
-  description: {
-    type: String,
-    default: siteMeta.description
-  },
-  openGraphImage: {
-    type: String,
-    default: `${siteMeta.url}/images/social/open-graph.png`
-  },
-  twitterCard: {
-    type: String,
-    default: 'summary'
-  },
-  twitterImage: {
-    type: String,
-    default: `${siteMeta.url}/images/social/twitter.png`
-  }
+withDefaults(defineProps<{
+  title: string,
+  description: string,
+  openGraphImage: string,
+  twitterCard: string,
+  twitterImage: string
+}>(), {
+  description: siteMeta.description,
+  openGraphImage: `${siteMeta.url}/images/social/open-graph.png`,
+  twitterCard: 'summary',
+  twitterImage: `${siteMeta.url}/images/social/twitter.png`
 })
 </script>
 
