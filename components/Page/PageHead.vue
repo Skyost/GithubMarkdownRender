@@ -1,5 +1,4 @@
-<script setup>
-import { useRoute, useRuntimeConfig } from '#app'
+<script setup lang="ts">
 import siteMeta from '~/siteMeta'
 
 const runtimeConfig = useRuntimeConfig()
