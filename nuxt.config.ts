@@ -1,5 +1,5 @@
 import StylelintPlugin from 'vite-plugin-stylelint'
-import eslintPlugin from 'vite-plugin-eslint'
+import eslintPlugin from '@nabla/vite-plugin-eslint'
 import 'dotenv/config'
 import siteMeta from './siteMeta'
 
@@ -35,9 +35,9 @@ export default defineNuxtConfig({
   ],
 
   modules: [
-    '~/modules/generate-cname',
+    'nuxt-cname-generator',
     'skimple-components/nuxt',
-    'nuxt-simple-sitemap',
+    '@nuxtjs/sitemap',
     'nuxt-simple-robots'
   ],
 
@@ -65,7 +65,7 @@ export default defineNuxtConfig({
   },
 
   cname: {
-    hostname: url
+    host: url
   },
 
   nitro: {
