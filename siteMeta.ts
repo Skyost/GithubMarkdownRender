@@ -6,6 +6,7 @@ export default {
   prerender: [
     '/Skyost/Beerstory/master/docs/privacy_policy.md',
     '/Skyost/Bacomathiques/master/politique-de-confidentialite.md',
+    '/Skyost/Bacomathiques/app/politique-de-confidentialite.md',
     '/Skyost/UnicaenTimetable/master/privacy_policy.md'
   ]
 }
