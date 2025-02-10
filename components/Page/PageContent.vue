@@ -1,7 +1,7 @@
 <template>
-  <ski-container class="page-content">
+  <b-container class="page-content">
     <slot />
-  </ski-container>
+  </b-container>
 </template>
 
 <style lang="scss" scoped>

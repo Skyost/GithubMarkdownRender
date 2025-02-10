@@ -3,16 +3,20 @@ defineProps<{ title?: string }>()
 </script>
 
 <template>
-  <ski-navbar-brand>
-    <img class="logo" src="/images/logo.svg" alt="Logo">
-    <nuxt-link v-if="title" class="navbar-brand" to="/">{{ title }}</nuxt-link>
-  </ski-navbar-brand>
+  <b-navbar-brand to="/">
+    <img
+      class="logo"
+      src="/images/logo.svg"
+      alt="Logo"
+    > {{ title }}
+  </b-navbar-brand>
 </template>
 
 <style lang="scss" scoped>
 .logo {
   height: 1.5em;
   vertical-align: -0.4em;
+  margin-right: 0.3em;
 
   @media (prefers-color-scheme: dark) {
     filter: invert(100%);

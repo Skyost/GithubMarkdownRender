@@ -1,4 +1,4 @@
-import { marked } from 'marked'
+import { marked, type RendererObject, type Tokens } from 'marked'
 import { gfmHeadingId } from 'marked-gfm-heading-id'
 import { markedEmoji } from 'marked-emoji'
 import { Octokit } from '@octokit/rest'
@@ -14,17 +14,17 @@ export const useMarked = async () => {
     marked.use(markedEmoji({ emojis: response.data as Record<string, string> }))
     marked.use(markedHighlight({
       langPrefix: 'hljs language-',
-      highlight (code, lang) {
+      highlight(code, lang) {
         const language = hljs.getLanguage(lang) ? lang : 'plaintext'
         return hljs.highlight(code, { language }).value
       }
     }))
 
     const defaultRenderer = new marked.Renderer(marked.defaults)
-    const renderer = {
-      html (html: string, block?: boolean): string {
+    const renderer: RendererObject = {
+      html(object: Tokens.HTML | Tokens.Tag): string {
         let hasChanged = false
-        const element = parse(html)
+        const element = parse(object.raw)
         const images = element.querySelectorAll('img')
         for (const image of images) {
           if (image.hasAttribute('src')) {
@@ -35,10 +35,21 @@ export const useMarked = async () => {
             }
           }
         }
-        return defaultRenderer.html(hasChanged ? element.outerHTML : html, block)
+        return defaultRenderer.html({
+          ...object,
+          raw: hasChanged ? element.outerHTML : object.raw
+        })
       },
-      image (href: string, title: string | null, text: string): string {
-        return defaultRenderer.image(handleImageSrc(href) ?? href, title, text)
+      image({ raw, type, href, title, text }: Tokens.Image): string {
+        return defaultRenderer.image(
+          {
+            raw,
+            type,
+            href: handleImageSrc(href) ?? href,
+            title: title,
+            text: text
+          }
+        )
       }
     }
     marked.use({ renderer })
@@ -46,7 +57,7 @@ export const useMarked = async () => {
   return marked
 }
 
-function handleImageSrc (src: string): string | null {
+function handleImageSrc(src: string): string | null {
   const imageRegex = /https?:\/\/github\.com\/([A-Za-z0-9\-.]+)\/([A-Za-z0-9\-.]+)\/blob\/([A-Za-z0-9\-.]+)\/(.*)$/g
   const matches = src.matchAll(imageRegex)
   for (const match of matches) {

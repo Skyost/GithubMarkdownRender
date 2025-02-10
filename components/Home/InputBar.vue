@@ -11,15 +11,20 @@ const goToUrl = () => navigateTo(url.value)
 
 <template>
   <form @submit.prevent="goToUrl">
-    <ski-input-group>
-      <ski-form-control
+    <b-form-group class="d-flex flex-row">
+      <b-form-input
         v-model="target"
         :placeholder="defaultUrl"
         aria-describedby="button-render"
       />
-      <ski-button id="button-render" :variant="buttonVariant" type="submit" :to="url">
-        <ski-icon icon="arrow-right" />
-      </ski-button>
-    </ski-input-group>
+      <b-button
+        id="button-render"
+        :variant="buttonVariant"
+        type="submit"
+        :to="url"
+      >
+        <icon name="bi:arrow-right" />
+      </b-button>
+    </b-form-group>
   </form>
 </template>

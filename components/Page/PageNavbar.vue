@@ -1,22 +1,43 @@
 <script setup lang="ts">
 import siteMeta from '~/siteMeta'
+
+const { show: showModal } = useModal('page-about-modal')
 </script>
 
 <template>
-  <ski-navbar brightness="primary" class="navbar bg-body-tertiary">
-    <ski-navbar-collapse id="page-navbar-collapse">
-      <page-navbar-brand class="d-none d-lg-inline" :title="siteMeta.name" />
-      <ski-navbar-items class="ms-auto">
-        <ski-navbar-item class="page-navbar-item" to="/" :active="$route.path === '/'">
-          <ski-icon icon="house-door-fill" /> Home
-        </ski-navbar-item>
-        <ski-navbar-item class="page-navbar-item" href="#" data-bs-toggle="modal" data-bs-target="#page-about-modal">
-          <ski-icon icon="info-circle-fill" /> About
-        </ski-navbar-item>
-      </ski-navbar-items>
-    </ski-navbar-collapse>
+  <b-navbar
+    brightness="primary"
+    toggleable="lg"
+    class="bg-body-tertiary"
+  >
+    <page-navbar-brand
+      class="d-none d-lg-inline"
+      :title="siteMeta.name"
+    />
+    <b-navbar-toggle target="page-navbar-collapse" />
+    <b-collapse
+      id="page-navbar-collapse"
+      is-nav
+    >
+      <b-navbar-nav class="ms-auto">
+        <b-nav-item
+          class="page-navbar-item"
+          to="/"
+          :active="$route.path === '/'"
+        >
+          <icon name="bi:house-door-fill" /> Home
+        </b-nav-item>
+        <b-nav-item
+          class="page-navbar-item"
+          href="#"
+          @click.prevent="showModal"
+        >
+          <icon name="bi:info-circle-fill" /> About
+        </b-nav-item>
+      </b-navbar-nav>
+    </b-collapse>
     <page-navbar-brand class="mobile-navbar-brand" />
-  </ski-navbar>
+  </b-navbar>
 </template>
 
 <style lang="scss" scoped>

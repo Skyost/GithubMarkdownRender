@@ -7,8 +7,14 @@ import siteMeta from '~/siteMeta'
   <div class="h-100 d-flex justify-content-center">
     <div class="align-self-center text-center">
       <page-head title="Home" />
-      <img class="logo" src="/images/logo.svg" alt="Logo">
-      <h1 class="mb-4">{{ siteMeta.name }}</h1>
+      <img
+        class="logo"
+        src="/images/logo.svg"
+        alt="Logo"
+      >
+      <h1 class="mb-4">
+        {{ siteMeta.name }}
+      </h1>
       <input-bar />
       <p class="mt-2 mb-0">
         💡 <strong>Tip.</strong> You can type <code>Name/Repo</code> so that the renderer will point to the given

@@ -5,10 +5,10 @@ import siteMeta from '~/siteMeta'
 const route = useRoute()
 const marked = await useMarked()
 
-let user = null
-let repo = null
-let branch = 'main'
-let path = 'README.md'
+let user: string | null = null
+let repo: string | null = null
+let branch: string = 'main'
+let path: string = 'README.md'
 
 const slug: string[] = route.params.slug as string[]
 if (slug.length >= 2) {
@@ -22,17 +22,23 @@ if (slug.length >= 2) {
   }
 }
 const url = `https://raw.githubusercontent.com/${user}/${repo}/${branch}/${path}`
-const { pending, error, data } = await useFetch(url, {
-  transform: (markdown: string) => DOMPurify.sanitize(marked.parse(markdown))
+const { status, error, data } = await useFetch(url, {
+  transform: async (markdown: string) => DOMPurify.sanitize(await marked.parse(markdown))
 })
 </script>
 
 <template>
   <div class="h-100">
-    <div v-if="pending" class="h-100 d-flex justify-content-center">
+    <div
+      v-if="status === 'pending'"
+      class="h-100 d-flex justify-content-center"
+    >
       <page-head title="Loading..." />
       <div class="align-self-center text-center">
-        <div class="spinner-border" role="status">
+        <div
+          class="spinner-border"
+          role="status"
+        >
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
@@ -63,7 +69,10 @@ const { pending, error, data } = await useFetch(url, {
     </div>
     <div v-else>
       <page-head :title="path" />
-      <div class="markdown-body" v-html="data" />
+      <div
+        class="markdown-body"
+        v-html="data"
+      />
     </div>
   </div>
 </template>

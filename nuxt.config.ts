@@ -8,6 +8,7 @@ const url = process.env.DEBUG_MODE === 'true' ? 'http://localhost:3000' : siteMe
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   ssr: true,
+  compatibilityDate: '2025-01-01',
 
   devtools: {
     enabled: process.env.DEBUG_MODE === 'true'
@@ -35,33 +36,33 @@ export default defineNuxtConfig({
   ],
 
   modules: [
+    '@nuxt/eslint',
     'nuxt-cname-generator',
-    'skimple-components/nuxt',
+    '@bootstrap-vue-next/nuxt',
     '@nuxtjs/sitemap',
-    'nuxt-simple-robots'
+    '@nuxtjs/robots',
+    '@nuxt/icon'
   ],
-
-  runtimeConfig: {
-    public: {
-      url
-    }
-  },
 
   vite: {
     plugins: [
       StylelintPlugin(),
       eslintPlugin()
-    ]
-  },
-
-  skimpleComponents: {
-    bootstrapCss: false,
-    bootstrapJs: false
+    ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler',
+          silenceDeprecations: ['mixed-decls', 'color-functions', 'global-builtin', 'import']
+        }
+      }
+    }
   },
 
   site: {
     url,
-    name: siteMeta.name
+    name: siteMeta.name,
+    trailingSlash: false
   },
 
   cname: {
@@ -72,5 +73,24 @@ export default defineNuxtConfig({
     prerender: {
       routes: siteMeta.prerender
     }
-  }
+  },
+
+  icon: {
+    provider: 'iconify',
+    class: 'vue-icon'
+  },
+
+  eslint: {
+    config: {
+      stylistic: true
+    }
+  },
+
+  experimental: {
+    defaults: {
+      nuxtLink: {
+        trailingSlash: 'remove'
+      }
+    }
+  },
 })
